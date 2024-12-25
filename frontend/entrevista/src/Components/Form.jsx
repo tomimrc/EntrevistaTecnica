@@ -22,21 +22,13 @@ export const Form = ({setData,data} ) => {
         e.preventDefault();
 
         try {
-            if (!selectedCustomerId){
 
                 const length = await api.get("/customer",data)
                 const response = await api.post("/customer", datos);
                 const nuevoUsuario = {id:length.data.length +1, ...response.data};
     
                 setData([...data, nuevoUsuario]);
-            }else {
-                const response = await api.put(`/customer/${selectedCustomerId}`, datos);
-                const updatedData = data.map((customer) =>
-                  customer.id === selectedCustomerId ? response.data : customer
-                );
-                setData(updatedData);
-                setSelectedCustomerId(null);  
-              }
+              
 
             setDatos({
                 first_name: "",
